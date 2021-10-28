@@ -55,5 +55,11 @@ export default new Vuex.Store({
 			return false;
 		},
 
+		logout(context) {
+			context.commit('setAuthorized', false);
+			context.commit('setToken', null);
+			localStorage.removeItem('token');
+		},
+
 	},
 });
