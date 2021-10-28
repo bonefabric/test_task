@@ -8,7 +8,10 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
+import Application from "./components/Application";
+
 import store from './store';
+import router from './router';
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,5 +33,7 @@ import store from './store';
 
 new Vue({
     el: '#app',
+	render: h => h(Application),
 	store,
+	router,
 });
