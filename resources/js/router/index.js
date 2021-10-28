@@ -14,7 +14,7 @@ export default new VueRouter({
 			component: index,
 		},
 		{
-			path: 'login',
+			path: '/login',
 			name: 'login',
 			component: () => import('../components/views/login'),
 			meta: {
