@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::post('token/get', [\App\Http\Controllers\Api\AuthController::class, 'getToken']);
+
 Route::group(['middleware' => 'auth:sanctum'], function () {
 	Route::apiResource('users', \App\Http\Controllers\Api\UsersController::class, [
 		'except' => ['update']
