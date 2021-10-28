@@ -31,7 +31,7 @@ export default new Vuex.Store({
 
 		init(context) {
 			const token = localStorage.getItem('token');
-			if (token === null || token.length !== 42) {
+			if (token === null || token.length < 30) {
 				localStorage.removeItem('token')
 				return;
 			}
@@ -46,7 +46,7 @@ export default new Vuex.Store({
 				password: data.password,
 			});
 			const token = result.data.token;
-			if (token && token.length === 42) {
+			if (token && token.length > 30) {
 				localStorage.setItem('token', token);
 				context.commit('setToken', token);
 				context.commit('setAuthorized', true);

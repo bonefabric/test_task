@@ -1,7 +1,18 @@
 <template>
-	<div class="container">
-		<router-view class="mt-5"/>
+	<div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="$store.getters.isAuthorized">
+			<div class="container-fluid justify-content-end">
+					<span class="navbar-text mr-5">
+						<a href="" @click.prevent>Log out</a>
+					</span>
+			</div>
+		</nav>
+		<div class="container">
+
+			<router-view class="mt-5"/>
+		</div>
 	</div>
+
 </template>
 
 <script>
