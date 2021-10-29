@@ -17,7 +17,7 @@
 <script>
 export default {
 	name: "Application",
-	mounted() {
+	beforeMount() {
 		this.$store.dispatch('init');
 		this.$router.beforeEach((to, from, next) => {
 			if (to.meta.guest !== true && !this.$store.getters.isAuthorized) {

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex'
+import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -17,18 +18,37 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
+
+		/** Account */
 		isAuthorized: state => state.account.isAuthorized,
 		token: state => state.account.token,
+		/** End account */
+
+
+		/** Data */
+		users: state => state.data.users.list,
+		isUsersLoaded: state => state.data.users.loaded,
+		/** End data */
 	},
 	mutations: {
 
-		//Account
+		/** Account */
 		setToken: (state, token) => state.account.token = token,
 		setAuthorized: (state, value) => state.account.isAuthorized = value,
+		/** End account */
+
+
+		/** Data */
+		setUsers: (state, users) => state.data.users.list = users,
+		addUser: (state, user) => state.data.users.list.push(user),
+		removeUser: (state, id) => state.data.users.list = state.data.users.list.filter((user) => user.id !== id),
+		setUsersAsLoaded: (state, value) => state.data.users.loaded = value,
+		/** End data */
 
 	},
 	actions: {
 
+		/** Initialization */
 		init(context) {
 			const token = localStorage.getItem('token');
 			if (token === null || token.length < 30) {
@@ -38,7 +58,10 @@ export default new Vuex.Store({
 			context.commit('setAuthorized', true);
 			context.commit('setToken', token);
 		},
+		/** End initialization */
 
+
+		/** Account */
 		async authorize(context, data) {
 			localStorage.removeItem('token');
 			const result = await axios.post('token/get', {
@@ -60,6 +83,24 @@ export default new Vuex.Store({
 			context.commit('setToken', null);
 			localStorage.removeItem('token');
 		},
+		/** End account */
 
+
+		/** Data */
+		async loadUsers(context) {
+			context.commit('setUsersAsLoaded', false);
+			context.commit('setUsers', []);
+			const result = await axios.get('users', {
+				headers: {
+					'Authorization': 'Bearer ' + context.getters.token,
+					'Accept': 'application/json'
+				}
+			});
+			if (result.status === 200) {
+				context.commit('setUsers', result.data);
+			}
+			context.commit('setUsersAsLoaded', true);
+		}
+		/** End data */
 	},
 });
