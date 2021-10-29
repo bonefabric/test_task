@@ -120,6 +120,30 @@ export default new Vuex.Store({
 					'Accept': 'application/json'
 				}
 			});
+		},
+
+		async updateName(context, user) {
+			await axios.post('/users', {
+				id: user.id,
+				name: user.name
+			}, {
+				headers: {
+					'Authorization': 'Bearer ' + context.getters.token,
+					'Accept': 'application/json'
+				}
+			})
+		},
+
+		async updatePassword(context, user) {
+			await axios.post('/users', {
+				id: user.id,
+				password: user.password
+			}, {
+				headers: {
+					'Authorization': 'Bearer ' + context.getters.token,
+					'Accept': 'application/json'
+				}
+			})
 		}
 		/** End data */
 	},
