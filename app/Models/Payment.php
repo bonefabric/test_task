@@ -16,6 +16,10 @@ class Payment extends Model
 		'sum',
 	];
 
+	protected $hidden = [
+		'user_ref'
+	];
+
 	/**
 	 * @return HasOne
 	 */

@@ -40,7 +40,6 @@ export default new Vuex.Store({
 
 		/** Data */
 		setUsers: (state, users) => state.data.users.list = users,
-		addUser: (state, user) => state.data.users.list.push(user),
 		removeUser: (state, id) => state.data.users.list = state.data.users.list.filter((user) => user.id !== id),
 		setUsersAsLoaded: (state, value) => state.data.users.loaded = value,
 		/** End data */
@@ -100,6 +99,19 @@ export default new Vuex.Store({
 				context.commit('setUsers', result.data);
 			}
 			context.commit('setUsersAsLoaded', true);
+		},
+
+		async loadPayments(context, id) {
+			const result = await axios.get('/users/' + id + '/payments', {
+				headers: {
+					'Authorization': 'Bearer ' + context.getters.token,
+					'Accept': 'application/json'
+				}
+			});
+			if (result.status === 200) {
+				return result.data;
+			}
+			return false;
 		}
 		/** End data */
 	},
