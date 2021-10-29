@@ -29,5 +29,13 @@ export default new VueRouter({
 				backButton: true,
 			}
 		},
+		{
+			path: '/user/edit/:id',
+			name: 'editUser',
+			component: () => import('../components/views/editUser'),
+			meta: {
+				backButton: true,
+			}
+		},
 	]
 });

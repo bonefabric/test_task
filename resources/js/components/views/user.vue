@@ -9,7 +9,7 @@
 					class="font-weight-bold">Created at: </span>{{ (new Date(user.created_at)).toLocaleString() }}</p>
 				<p class="card-text"><span
 					class="font-weight-bold">Updated at: </span>{{ (new Date(user.updated_at)).toLocaleString() }}</p>
-				<a href="" class="card-link">Edit</a>
+				<a href="" class="card-link" @click.prevent="$router.push({name: 'editUser', params: {id: user.id}})">Edit</a>
 				<a href="" class="card-link" @click.prevent="deleteUser">Delete</a>
 				<a href="" class="card-link" @click.prevent="showPayments">Show payments</a>
 			</div>
