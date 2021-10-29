@@ -9,17 +9,25 @@ export default new VueRouter({
 	mode: 'history',
 	routes: [
 		{
-			path: '/',
-			name: 'index',
-			component: index,
-		},
-		{
 			path: '/login',
 			name: 'login',
 			component: () => import('../components/views/login'),
 			meta: {
 				guest: true
 			}
-		}
+		},
+		{
+			path: '/',
+			name: 'index',
+			component: index,
+		},
+		{
+			path: '/user/:id',
+			name: 'user',
+			component: () => import('../components/views/user'),
+			meta: {
+				backButton: true,
+			}
+		},
 	]
 });

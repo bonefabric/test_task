@@ -1,9 +1,12 @@
 <template>
 	<div>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="$store.getters.isAuthorized">
-			<div class="container-fluid justify-content-end">
+			<div class="container-fluid justify-content-between flex-row-reverse">
 					<span class="navbar-text mr-5">
 						<a href="" @click.prevent="logout">Log out</a>
+					</span>
+				<span class="navbar-text mr-5" v-if="$route.meta.backButton">
+						<a href="" @click.prevent="$router.go(-1)">Back</a>
 					</span>
 			</div>
 		</nav>
