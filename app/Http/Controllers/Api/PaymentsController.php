@@ -20,4 +20,12 @@ class PaymentsController extends Controller
 		return new Response($user ? $user->payments()->withTrashed()->get() : 'error', $user ? 200 : 400);
 	}
 
+	/**
+	 * @return Response
+	 */
+	public function testPayment(): Response
+	{
+		return new Response('test');
+	}
+
 }

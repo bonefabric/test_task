@@ -24,5 +24,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 	Route::apiResource('users', \App\Http\Controllers\Api\UsersController::class, [
 		'except' => ['update']
 	]);
+	Route::get('users/{id}/payments/test', [\App\Http\Controllers\Api\PaymentsController::class, 'testPayment']);
 	Route::get('users/{id}/payments', [\App\Http\Controllers\Api\PaymentsController::class, 'list']);
 });

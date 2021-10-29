@@ -144,6 +144,15 @@ export default new Vuex.Store({
 					'Accept': 'application/json'
 				}
 			})
+		},
+
+		async testPayment(context, user) {
+			await axios.get('/users/' + user.id + '/payments/test', {
+				headers: {
+					'Authorization': 'Bearer ' + context.getters.token,
+					'Accept': 'application/json'
+				}
+			});
 		}
 		/** End data */
 	},

@@ -11,6 +11,7 @@
 					class="font-weight-bold">Updated at: </span>{{ (new Date(user.updated_at)).toLocaleString() }}</p>
 				<a href="" class="card-link" @click.prevent="$router.push({name: 'editUser', params: {id: user.id}})">Edit</a>
 				<a href="" class="card-link" @click.prevent="deleteUser">Delete</a>
+				<a href="" class="card-link" @click.prevent="testPayment">Test payment</a>
 				<a href="" class="card-link" @click.prevent="showPayments">Show payments</a>
 			</div>
 		</div>
@@ -86,6 +87,13 @@ export default {
 				.finally(() => {
 					this.$router.push({name: 'index'});
 				});
+		},
+		testPayment() {
+			this.paymentsLoading = true;
+			this.$store.dispatch('testPayment', {id: this.user.id})
+				.finally(() => {
+					this.showPayments()
+				})
 		},
 	}
 }
