@@ -37,9 +37,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id): Response
+    public function show(int $id): Response
 	{
-        //
+        $user = User::find($id);
+		return new Response($user ?? 'error', $user ? 200 : 400);
     }
 
 //    /**
