@@ -40,7 +40,6 @@ export default new Vuex.Store({
 
 		/** Data */
 		setUsers: (state, users) => state.data.users.list = users,
-		removeUser: (state, id) => state.data.users.list = state.data.users.list.filter((user) => user.id !== id),
 		setUsersAsLoaded: (state, value) => state.data.users.loaded = value,
 		/** End data */
 
@@ -112,6 +111,15 @@ export default new Vuex.Store({
 				return result.data;
 			}
 			return false;
+		},
+
+		async deleteUser(context, id) {
+			await axios.delete('/users/' + id, {
+				headers: {
+					'Authorization': 'Bearer ' + context.getters.token,
+					'Accept': 'application/json'
+				}
+			});
 		}
 		/** End data */
 	},

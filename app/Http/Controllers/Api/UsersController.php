@@ -60,8 +60,12 @@ class UsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id): Response
+    public function destroy(int $id): Response
 	{
-        //
+		$user = User::find($id);
+		if ($user) {
+			$user->delete();
+		}
+        return new Response();
     }
 }

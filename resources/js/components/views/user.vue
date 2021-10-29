@@ -10,7 +10,7 @@
 				<p class="card-text"><span
 					class="font-weight-bold">Updated at: </span>{{ (new Date(user.updated_at)).toLocaleString() }}</p>
 				<a href="" class="card-link">Edit</a>
-				<a href="" class="card-link">Delete</a>
+				<a href="" class="card-link" @click.prevent="deleteUser">Delete</a>
 				<a href="" class="card-link" @click.prevent="showPayments">Show payments</a>
 			</div>
 		</div>
@@ -77,6 +77,14 @@ export default {
 				})
 				.finally(() => {
 					this.paymentsLoading = false;
+				});
+		},
+		deleteUser() {
+			this.showingPayments = false;
+			this.paymentsLoading = false;
+			this.$store.dispatch('deleteUser', this.user.id)
+				.finally(() => {
+					this.$router.push({name: 'index'});
 				});
 		},
 	}
